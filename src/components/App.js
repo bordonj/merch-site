@@ -6,6 +6,7 @@ function App(){
   return (
     <React.Fragment>
       <Navbar />
+      <MerchControl />
     </React.Fragment>
   );
 }
