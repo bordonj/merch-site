@@ -1,7 +1,6 @@
 import React from 'react';
 import Navbar from './Navbar';
-// import SiteContainer from './SiteContainer';
-
+import MerchControl from './MerchControl';
 function App(){
   return (
     <React.Fragment>
