@@ -25,8 +25,13 @@ class MerchControl extends React.Component {
       formVisibleOnPage: false
     });
   }
-
+  
   render(){
+    let empty = null;
+    if (this.state.masterMerchList.length === 0) {
+      empty = <h1>NO ITEMS YET</h1>
+    }
+      
     let currentlyVisibleState = null;
     let buttonText = null;
     if (this.state.formVisibleOnPage) {
@@ -38,8 +43,11 @@ class MerchControl extends React.Component {
     }
     return (
       <React.Fragment>
+        {empty}
         {currentlyVisibleState}
-        <button onClick={this.handleClick}>{buttonText}</button>
+        <div class="toggle">
+          <button className ="btn btn-primary" onClick={this.handleClick}>{buttonText}</button>
+        </div>
       </React.Fragment>
     );
   }

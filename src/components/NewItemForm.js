@@ -20,18 +20,24 @@ function NewItemForm(props){
           type='text'
           name='name'
           placeholder='Item Name'
-        />
-        <input 
+          className="form-control"
+          />
+        <textarea 
           type='text'
           name='description'
           placeholder='Description'
-        />
+          className="form-control"
+          />
         <input 
           type='text'
           name='quantity'
           placeholder='Quantity'
+          className="form-control"
         />
-        <button type='submit'>Submit!</button>
+        <button 
+          className="btn btn-warning"
+          type='submit'>Submit!
+        </button>
       </form>
     </React.Fragment>
   );
