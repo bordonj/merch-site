@@ -1,14 +1,14 @@
 import React from "react";
-import Item from "./Item";
+import Merch from "./Merch";
 import PropTypes from 'prop-types';
 
 function MerchList(props){
   return (
     <React.Fragment>
-      {props.itemList.map((item, index) =>
-        <Item name = {item.name}
-            description = {item.description}
-            quantity = {item.quantity}
+      {props.MerchList.map((merch, index) =>
+        <Merch name = {merch.name}
+            description = {merch.description}
+            quantity = {merch.quantity}
             key={index} />
       )}
     </React.Fragment>
@@ -16,7 +16,7 @@ function MerchList(props){
 }
 
 MerchList.propTypes = {
-  itemList: PropTypes.array
+  MerchList: PropTypes.array
 };
 
 export default MerchList;

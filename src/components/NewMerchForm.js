@@ -2,10 +2,10 @@ import React from "react";
 import { v4 } from 'uuid';
 import PropTypes from 'prop-types';
 
-function NewItemForm(props){
-  function handleNewItemFromSubmission(e) {
+function NewMerchForm(props){
+  function handleNewMerchFromSubmission(e) {
     e.preventDefault();
-    props.onNewItemCreation({
+    props.onNewMerchCreation({
       name: e.target.name.value,
       description: e.target.description.value,
       quantity: e.target.quantity.value,
@@ -14,11 +14,11 @@ function NewItemForm(props){
   }
   return (
     <React.Fragment>
-      <form onSubmit={handleNewItemFromSubmission}>
+      <form onSubmit={handleNewMerchFromSubmission}>
         <input 
           type='text'
           name='name'
-          placeholder='Item Name'
+          placeholder='Merch Name'
           className="form-control"
           />
         <textarea 
@@ -43,8 +43,8 @@ function NewItemForm(props){
 }
 
 
-NewItemForm.propTypes = {
-  onNewItemCreation: PropTypes.func
+NewMerchForm.propTypes = {
+  onNewMerchCreation: PropTypes.func
 }
 
-export default NewItemForm;
+export default NewMerchForm;

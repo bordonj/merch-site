@@ -1,5 +1,5 @@
 import React from 'react';
-import NewItemForm from './NewItemForm';
+import NewMerchForm from './NewMerchForm';
 import MerchList from './MerchList';
 
 class MerchControl extends React.Component {
@@ -18,8 +18,8 @@ class MerchControl extends React.Component {
     }));
   }
 
-  handleAddingNewItem = (newItem) => {
-    const newMasterMerchList = this.state.masterMerchList.concat(newItem);
+  handleAddingNewMerch = (newMerch) => {
+    const newMasterMerchList = this.state.masterMerchList.concat(newMerch);
     this.setState({
       masterMerchList: newMasterMerchList,
       formVisibleOnPage: false
@@ -29,23 +29,23 @@ class MerchControl extends React.Component {
   render(){
     let empty = null;
     if (this.state.masterMerchList.length === 0) {
-      empty = <h1>NO ITEMS YET</h1>
+      empty = <h1>NO MERCH YET</h1>
     }
       
     let currentlyVisibleState = null;
     let buttonText = null;
     if (this.state.formVisibleOnPage) {
-      currentlyVisibleState = <NewItemForm onNewItemCreation={this.handleAddingNewItem} />
-      buttonText = "Return to Item List"
+      currentlyVisibleState = <NewMerchForm onNewMerchCreation={this.handleAddingNewMerch} />
+      buttonText = "Return to Merch List"
     } else {
-      currentlyVisibleState = <MerchList itemList={this.state.masterMerchList} />;
-      buttonText = "Add Item"
+      currentlyVisibleState = <MerchList MerchList={this.state.masterMerchList} />;
+      buttonText = "Add Merch"
     }
     return (
       <React.Fragment>
         {empty}
         {currentlyVisibleState}
-        <div class="toggle">
+        <div className="toggle">
           <button className ="btn btn-primary" onClick={this.handleClick}>{buttonText}</button>
         </div>
       </React.Fragment>

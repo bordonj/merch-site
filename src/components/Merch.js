@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
 
-function Item(props) {
-  const [itemCount, setItemCount] = useState(0)
+function Merch(props) {
+  const [MerchCount, setMerchCount] = useState(0)
 
   function addOne () {
-    setItemCount(itemCount + 1)  
+    setMerchCount(MerchCount + 1)  
   }
 
 
@@ -20,11 +20,11 @@ function Item(props) {
   )
 }
 
-Item.propTypes = {
+Merch.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   quantity: PropTypes.number.isRequired,
   key: PropTypes.number.isRequired
 };
 
-export default Item;
+export default Merch;
