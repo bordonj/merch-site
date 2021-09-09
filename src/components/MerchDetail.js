@@ -14,7 +14,7 @@ function MerchDetail(props){
     event.preventDefault();
     props.onClickingRestock({
       ...merch,
-      quantity: parseInt(merch.quantity) + parseInt(event.target.quantity.value)
+      quantity: parseInt(merch.quantity) + parseInt(event.target.quantity.value),
     });
   }
 

@@ -27,3 +27,7 @@ button {
   margin: auto;
   width: fit-content;
 }
+
+button {
+  margin: 3px;
+}
