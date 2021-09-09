@@ -74,6 +74,17 @@ class MerchControl extends React.Component {
       });
   }
   
+  handleRestockingMerch = (merchToEdit) => {
+    const editedMasterMerchList = this.state.masterMerchList
+    .filter(merch => merch.id !== this.state.selectedMerch.id)
+    .concat(merchToEdit);
+  this.setState({
+      masterMerchList: editedMasterMerchList,
+      editing: false,
+      selectedMerch: merchToEdit
+    });
+  }
+
   render(){
     let empty = null;
     if (this.state.masterMerchList.length === 0) {
@@ -94,6 +105,7 @@ class MerchControl extends React.Component {
         onClickingBuy={this.handleBuyingMerch}
         onClickingDelete={this.handleDeletingMerch}
         onClickingEdit={this.handleEditClick}
+        onClickingRestock= {this.handleRestockingMerch}
       />
       buttonText= "Return to Merch List";
     } else if (this.state.formVisibleOnPage) {

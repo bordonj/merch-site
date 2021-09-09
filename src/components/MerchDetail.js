@@ -10,6 +10,14 @@ function MerchDetail(props){
     quantity = "Out of Stock";
   }
 
+  function handleRestockMerchSubmission(event) {
+    event.preventDefault();
+    props.onClickingRestock({
+      ...merch,
+      quantity: parseInt(merch.quantity) + parseInt(event.target.quantity.value)
+    });
+  }
+
   return (
     <React.Fragment>
       <h1>Name: {merch.name}</h1>
@@ -32,6 +40,17 @@ function MerchDetail(props){
           Buy 1
       </button>
       <hr/>
+      {/* start of new stuff */}
+      <form onSubmit={handleRestockMerchSubmission}>
+        <input
+          className="form-control"
+          type='number'
+          name='quantity'
+          placeholder='quantity' />
+          {/* // defaultValue={startingQuantity} */}
+          <button className="btn btn-warning" type='submit'>restock</button>
+      </form>
+        {/* end of new stuff */}
     </React.Fragment>
   );
 }
@@ -41,6 +60,7 @@ MerchDetail.propTypes = {
   onClickingDelete: PropTypes.func,
   onClickingEdit: PropTypes.func,
   onClickingBuy: PropTypes.func,
+  onClickingRestock: PropTypes.func
 };
 
 export default MerchDetail;
