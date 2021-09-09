@@ -3,6 +3,7 @@ import NewMerchForm from './NewMerchForm';
 import MerchList from './MerchList';
 import MerchDetail from './MerchDetail';
 import EditMerchForm from './EditMerchForm';
+import Cart from './Cart';
 
 class MerchControl extends React.Component {
 
@@ -12,15 +13,36 @@ class MerchControl extends React.Component {
       formVisibleOnPage: false,
       masterMerchList: [],
       selectedMerch: null,
-      editing: false
+      editing: false,
+      cart: []
     };
   }
 
   handleBuyingMerch = (merch) => {
     if (merch.quantity > 0) {
       merch.quantity--;
+      const newMerch = this.state.cart.filter(m => m.id === this.state.selectedMerch.id)[0];
+      const newCart = this.state.cart.filter(m => m.id !== this.state.selectedMerch.id);
+      console.log('newMerch', newMerch);
+      console.log('newCart', newCart)
+      if(newMerch) {
+        newMerch.quantity++;
+        newCart.push(newMerch);
+        console.log('newCartTrue', newCart)
+      } else {
+        const newMerch0 = {...merch};
+        newMerch0.quantity = 1;
+        newCart.push(newMerch0);
+        console.log('newMerch0', newMerch0)
+        console.log('newCartFalse', newCart)
+      }
+      this.setState({
+        cart: newCart,
+        selectedMerch: merch,
+      });
+    } else {
+      alert('OUT OF STOCK!!!!!!');
     }
-    this.setState({selectedMerch: merch});
   }
 
   handleEditClick = () => {
@@ -72,6 +94,7 @@ class MerchControl extends React.Component {
         editing: false,
         selectedMerch: null
       });
+      console.log('cart', this.state.cart)
   }
   
   handleRestockingMerch = (merchToEdit) => {
@@ -118,10 +141,20 @@ class MerchControl extends React.Component {
     }
     return (
       <React.Fragment>
-        {empty}
-        {currentlyVisibleState}
-        <div className="toggle">
-          <button className ="btn btn-primary" onClick={this.handleClick}>{buttonText}</button>
+        <div className="row">
+          <div className='col-6'>
+            <h1>Merchandise Stock</h1>
+            {empty}
+            {currentlyVisibleState}
+            <button className ="btn btn-primary" onClick={this.handleClick}>{buttonText}</button>
+          </div>
+          <div className='col-3'>
+          </div>
+          <div className='col-3'>
+          <h1>Cart: </h1>
+            <Cart selectedMerch={this.state.selectedMerch} cart={this.state.cart}/>
+          </div>
+
         </div>
       </React.Fragment>
     );

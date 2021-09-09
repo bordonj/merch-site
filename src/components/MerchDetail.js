@@ -39,7 +39,7 @@ function MerchDetail(props){
           Buy 1
       </button>
       <hr/>
-      {/* start of new stuff */}
+
       <form onSubmit={handleRestockMerchSubmission}>
         <input
           className="form-control"
@@ -49,7 +49,7 @@ function MerchDetail(props){
           {/* // defaultValue={startingQuantity} */}
           <button className="btn btn-warning" type='submit'>restock</button>
       </form>
-        {/* end of new stuff */}
+      <hr/>
     </React.Fragment>
   );
 }
