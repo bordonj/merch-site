@@ -39,6 +39,14 @@ class MerchControl extends React.Component {
     const selectedMerch = this.state.masterMerchList.filter(merch => merch.id === id)[0];
     this.setState({selectedMerch: selectedMerch});
   }
+
+  handleDeletingMerch = (id) => {
+    const newMasterMerchList = this.state.masterMerchList.filter(merch => merch.id !== id);
+    this.setState({
+      masterMerchList: newMasterMerchList,
+      selectedMerch: null
+    });
+  }
   
   render(){
     let empty = null;
@@ -48,8 +56,12 @@ class MerchControl extends React.Component {
       
     let currentlyVisibleState = null;
     let buttonText = null;
+
     if (this.state.selectedMerch != null) {
-      currentlyVisibleState = <MerchDetail merch = {this.state.selectedMerch}/>
+      currentlyVisibleState = <MerchDetail 
+        merch = {this.state.selectedMerch}
+        onClickingDelete={this.handleDeletingMerch}
+      />
       buttonText= "Return to Merch List";
     } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewMerchForm onNewMerchCreation={this.handleAddingNewMerch} />
