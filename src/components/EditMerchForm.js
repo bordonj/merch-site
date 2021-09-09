@@ -18,6 +18,7 @@ function EditMerchForm (props) {
     <React.Fragment>
       <ReusableForm 
         formSubmissionHandler={handleEditMerchFormSubmission}
+        merch={merch}
         buttonText="Update Merch" />
     </React.Fragment>
   );
