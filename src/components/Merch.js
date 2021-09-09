@@ -5,10 +5,12 @@ function Merch(props) {
 
   return (
     <React.Fragment>
-      <h3>{props.name}</h3>
-      <p>{props.description}</p>
-      <p>Left in stock: {props.quantity}</p>
-      <hr />
+      <div onClick = {() => props.whenMerchClicked(props.id)}>
+        <h3>{props.name}</h3>
+        <p>{props.description}</p>
+        <p>Left in stock: {props.quantity}</p>
+        <hr />
+      </div>
     </React.Fragment>
   )
 }
@@ -17,7 +19,8 @@ Merch.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   quantity: PropTypes.number.isRequired,
-  key: PropTypes.number.isRequired
+  id: PropTypes.number.isRequired,
+  whenMerchClicked: PropTypes.func
 };
 
 export default Merch;
