@@ -15,9 +15,16 @@ class MerchControl extends React.Component {
   }
 
   handleClick = () => {
-    this.setState(prevState => ({
-      formVisibleOnPage: !prevState.formVisibleOnPage
-    }));
+    if (this.state.selectedMerch != null) {
+      this.setState({
+        formVisibleOnPage: false,
+        selectedMerch: null
+      });
+    } else {
+      this.setState(prevState => ({
+        formVisibleOnPage: !prevState.formVisibleOnPage,
+      }));
+    }
   }
 
   handleAddingNewMerch = (newMerch) => {
