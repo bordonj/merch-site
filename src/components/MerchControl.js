@@ -1,6 +1,7 @@
 import React from 'react';
 import NewMerchForm from './NewMerchForm';
 import MerchList from './MerchList';
+import MerchDetail from './MerchDetail';
 
 class MerchControl extends React.Component {
 
@@ -8,7 +9,8 @@ class MerchControl extends React.Component {
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      masterMerchList: []
+      masterMerchList: [],
+      selectedMerch: null
     };
   }
 
@@ -25,6 +27,11 @@ class MerchControl extends React.Component {
       formVisibleOnPage: false
     });
   }
+
+  handleChangingSelectedMerch = (id) => {
+    const selectedMerch = this.state.masterMerchList.filter(merch => merch.id === id)[0];
+    this.setState({selectedMerch: selectedMerch});
+  }
   
   render(){
     let empty = null;
@@ -34,11 +41,14 @@ class MerchControl extends React.Component {
       
     let currentlyVisibleState = null;
     let buttonText = null;
-    if (this.state.formVisibleOnPage) {
+    if (this.state.selectedMerch != null) {
+      currentlyVisibleState = <MerchDetail merch = {this.state.selectedMerch}/>
+      buttonText= "Return to Merch List";
+    } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewMerchForm onNewMerchCreation={this.handleAddingNewMerch} />
       buttonText = "Return to Merch List"
     } else {
-      currentlyVisibleState = <MerchList MerchList={this.state.masterMerchList} />;
+      currentlyVisibleState = <MerchList MerchList={this.state.masterMerchList} onMerchSelection={this.handleChangingSelectedMerch} />;
       buttonText = "Add Merch"
     }
     return (
