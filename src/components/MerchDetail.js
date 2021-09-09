@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 function MerchDetail(props){
   const {merch, onClickingDelete, onClickingBuy} = props;
-  console.log('hi', props.merch)
 
   let quantity = merch.quantity;
   if (quantity === 0) {

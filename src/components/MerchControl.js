@@ -85,6 +85,7 @@ class MerchControl extends React.Component {
     });
   }
 
+
   render(){
     let empty = null;
     if (this.state.masterMerchList.length === 0) {
