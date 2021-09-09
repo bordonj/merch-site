@@ -6,18 +6,21 @@ function ReusableForm(props) {
     <>
       <form onSubmit={props.formSubmissionHandler}>
         <input
+          className="form-control"
           type='text'
           name='name'
           placeholder='Name' />
         <textarea
+          className="form-control"
           type='text'
           name='description'
           placeholder='description' />
         <input
+          className="form-control"
           type='number'
           name='quantity'
           placeholder='quantity' />
-          <button type='submit'>{props.buttonText}</button>
+          <button className="btn btn-warning" type='submit'>{props.buttonText}</button>
       </form>
     </>
   );

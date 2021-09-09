@@ -10,7 +10,12 @@ function MerchDetail(props){
       <h3>Description: {merch.description}</h3>
       <h3>Quantity: {merch.quantity}</h3>
       <h3>ID: {merch.id}</h3>
-      <button onClick={() => onClickingDelete(merch.id)}>Delete Merch
+      <button onClick={ props.onClickingEdit }>
+        Update Merch
+      </button>
+      <button 
+        onClick={() => onClickingDelete(merch.id)}>
+          Delete Merch
       </button>
       <hr/>
     </React.Fragment>
@@ -19,7 +24,8 @@ function MerchDetail(props){
 
 MerchDetail.propTypes = {
   merch: PropTypes.object,
-  onClickingDelete: PropTypes.func
+  onClickingDelete: PropTypes.func,
+  onClickingEdit: PropTypes.func
 };
 
 export default MerchDetail;
