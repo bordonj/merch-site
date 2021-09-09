@@ -11,7 +11,6 @@ function NewItemForm(props){
       quantity: e.target.quantity.value,
       id: v4()
     });
-    console.log('newItemform', props);
   }
   return (
     <React.Fragment>

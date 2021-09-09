@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 function MerchList(props){
   return (
     <React.Fragment>
-      
       {props.itemList.map((item, index) =>
         <Item name = {item.name}
             description = {item.description}
