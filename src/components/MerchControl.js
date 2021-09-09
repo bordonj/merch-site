@@ -16,6 +16,13 @@ class MerchControl extends React.Component {
     };
   }
 
+  handleBuyingMerch = (merch) => {
+    if (merch.quantity > 0) {
+      merch.quantity--;
+    }
+    this.setState({selectedMerch: merch});
+  }
+
   handleEditClick = () => {
     console.log('handleEditClick reached');
     this.setState({editing: true});
@@ -84,6 +91,7 @@ class MerchControl extends React.Component {
     } else if (this.state.selectedMerch != null) {
       currentlyVisibleState = <MerchDetail 
         merch = {this.state.selectedMerch}
+        onClickingBuy={this.handleBuyingMerch}
         onClickingDelete={this.handleDeletingMerch}
         onClickingEdit={this.handleEditClick}
       />
