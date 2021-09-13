@@ -116,11 +116,16 @@ class MerchControl extends React.Component {
   }
   
   handleRestockingMerch = (merchToEdit) => {
-    const editedMasterMerchList = this.state.masterMerchList
-    .filter(merch => merch.id !== this.state.selectedMerch.id)
-    .concat(merchToEdit);
-  this.setState({
-      masterMerchList: editedMasterMerchList,
+    const { dispatch } = this.props;
+    // const editedMasterMerchList = this.state.masterMerchList
+    // .filter(merch => merch.id !== this.state.selectedMerch.id)
+    // .concat(merchToEdit);
+    const action = {
+      ...merchToEdit,
+      type: 'ADD_MERCH'
+    }
+    dispatch(action)
+    this.setState({
       editing: false,
       selectedMerch: merchToEdit
     });
@@ -129,7 +134,7 @@ class MerchControl extends React.Component {
 
   render(){
     let empty = null;
-    if (this.state.masterMerchList.length === 0) {
+    if (this.props.masterMerchList.length === 0) {
       empty = <h1>NO MERCH YET</h1>
     }
       
