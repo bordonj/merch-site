@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import NewMerchForm from './NewMerchForm';
 import MerchList from './MerchList';
 import MerchDetail from './MerchDetail';
@@ -11,7 +12,6 @@ class MerchControl extends React.Component {
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      masterMerchList: [],
       selectedMerch: null,
       editing: false,
       cart: []
@@ -65,9 +65,19 @@ class MerchControl extends React.Component {
   }
 
   handleAddingNewMerch = (newMerch) => {
-    const newMasterMerchList = this.state.masterMerchList.concat(newMerch);
+    console.log('props with adding new merch', this.props);
+    console.log('this MerchControl class', this);
+    const { dispatch } = this.props;
+    const { id, name, quantity, description } = newMerch;
+    const action = {
+      type: 'ADD_MERCH',
+      id: id,
+      name: name,
+      quantity: quantity,
+      description: description,
+    }
+    dispatch(action);  
     this.setState({
-      masterMerchList: newMasterMerchList,
       formVisibleOnPage: false
     });
   }
@@ -160,5 +170,6 @@ class MerchControl extends React.Component {
     );
   }
 }
+MerchControl = connect()(MerchControl);
 
 export default MerchControl;
