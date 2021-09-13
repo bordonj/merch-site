@@ -84,7 +84,7 @@ class MerchControl extends React.Component {
   }
 
   handleChangingSelectedMerch = (id) => {
-    const selectedMerch = this.state.masterMerchList.filter(merch => merch.id === id)[0];
+    const selectedMerch = this.props.masterMerchList[id]
     this.setState({selectedMerch: selectedMerch});
   }
 
