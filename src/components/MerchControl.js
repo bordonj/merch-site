@@ -5,6 +5,7 @@ import MerchList from './MerchList';
 import MerchDetail from './MerchDetail';
 import EditMerchForm from './EditMerchForm';
 import Cart from './Cart';
+import PropTypes from "prop-types";
 
 class MerchControl extends React.Component {
 
@@ -177,6 +178,10 @@ class MerchControl extends React.Component {
     );
   }
 }
+
+MerchControl.propTypes = {
+  masterMerchList: PropTypes.object
+};
 
 const MapStateToProps = state => {
   return {
