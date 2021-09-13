@@ -10,6 +10,17 @@ describe('merchListReducer', () => {
     id: 1
   };
 
+  const currentState = {
+    1: {name: 'Jenn',
+    description: 'confused potato',
+    quantity: 1,
+    id: 1 },
+    2: {name: 'Pigeon',
+    description: 'very professional',
+    quantity: 1,
+    id: 2 }
+  }
+
   test('Should return default state if no action type is recognized', () => {
     expect(merchListReducer({}, { type: null })).toEqual({});
   });
@@ -31,6 +42,19 @@ describe('merchListReducer', () => {
         quantity: quantity,
         id: id
       }
+    });
+  });
+
+  test('Should successfully delete a merch', () => {
+    action = {
+      type: 'DELETE_MERCH',
+      id: 1
+    };
+    expect(merchListReducer(currentState, action)).toEqual({
+      2: {name: 'Pigeon',
+      description: 'very professional',
+      quantity: 1,
+      id: 2}
     });
   });
 
