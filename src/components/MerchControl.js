@@ -154,7 +154,7 @@ class MerchControl extends React.Component {
       currentlyVisibleState = <NewMerchForm onNewMerchCreation={this.handleAddingNewMerch} />
       buttonText = "Return to Merch List"
     } else {
-      currentlyVisibleState = <MerchList MerchList={this.props.masterMerchList} onMerchSelection={this.handleChangingSelectedMerch} />;
+      currentlyVisibleState = <MerchList merchList={this.props.masterMerchList} onMerchSelection={this.handleChangingSelectedMerch} />;
       buttonText = "Add Merch"
     }
     return (
