@@ -88,11 +88,13 @@ class MerchControl extends React.Component {
   }
 
   handleDeletingMerch = (id) => {
-    const newMasterMerchList = this.state.masterMerchList.filter(merch => merch.id !== id);
-    this.setState({
-      masterMerchList: newMasterMerchList,
-      selectedMerch: null
-    });
+    const { dispatch } = this.props;
+    const action = {
+      type: 'DELETE_MERCH',
+      id: id
+    }
+    dispatch(action);
+    this.setState({ selectedMerch: null })
   }
 
   handleEditingMerchInList = (merchToEdit) => {
@@ -107,8 +109,8 @@ class MerchControl extends React.Component {
     }
     dispatch(action);
     this.setState({
-      editing: false;
-      selectedMerch: null
+      editing: false,
+      selectedMerch: null,
     });
   }
   
