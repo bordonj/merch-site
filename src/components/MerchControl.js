@@ -117,9 +117,6 @@ class MerchControl extends React.Component {
   
   handleRestockingMerch = (merchToEdit) => {
     const { dispatch } = this.props;
-    // const editedMasterMerchList = this.state.masterMerchList
-    // .filter(merch => merch.id !== this.state.selectedMerch.id)
-    // .concat(merchToEdit);
     const action = {
       ...merchToEdit,
       type: 'ADD_MERCH'
