@@ -177,6 +177,13 @@ class MerchControl extends React.Component {
     );
   }
 }
-MerchControl = connect()(MerchControl);
+
+const MapStateToProps = state => {
+  return {
+    masterMerchList: state
+  }
+}
+
+MerchControl = connect(MapStateToProps)(MerchControl);
 
 export default MerchControl;
