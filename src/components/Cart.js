@@ -6,12 +6,10 @@ function Cart(props) {
   return (
     <React.Fragment>
       {props.cart.map((c) =>
-        <Merch 
-          name = {c.name}
-          description = {c.description}
-          quantity = {c.quantity}
-          id={c.id}
-          key={c.id}/>
+      <>
+        <h5>{c.name}</h5>
+        <p>quantity bought: {c.quantity}</p>     
+      </>   
       )}
     </React.Fragment>
   );

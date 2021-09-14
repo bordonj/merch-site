@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import NewMerchForm from './NewMerchForm';
 import MerchList from './MerchList';
 import MerchDetail from './MerchDetail';
 import EditMerchForm from './EditMerchForm';
 import Cart from './Cart';
+import PropTypes from "prop-types";
 
 class MerchControl extends React.Component {
 
@@ -11,7 +13,6 @@ class MerchControl extends React.Component {
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      masterMerchList: [],
       selectedMerch: null,
       editing: false,
       cart: []
@@ -65,44 +66,63 @@ class MerchControl extends React.Component {
   }
 
   handleAddingNewMerch = (newMerch) => {
-    const newMasterMerchList = this.state.masterMerchList.concat(newMerch);
+    console.log('props with adding new merch', this.props);
+    console.log('this MerchControl class', this);
+    const { dispatch } = this.props;
+    const { id, name, quantity, description } = newMerch;
+    const action = {
+      type: 'ADD_MERCH',
+      id: id,
+      name: name,
+      quantity: quantity,
+      description: description,
+    }
+    dispatch(action);  
     this.setState({
-      masterMerchList: newMasterMerchList,
       formVisibleOnPage: false
     });
   }
 
   handleChangingSelectedMerch = (id) => {
-    const selectedMerch = this.state.masterMerchList.filter(merch => merch.id === id)[0];
+    const selectedMerch = this.props.masterMerchList[id]
     this.setState({selectedMerch: selectedMerch});
   }
 
   handleDeletingMerch = (id) => {
-    const newMasterMerchList = this.state.masterMerchList.filter(merch => merch.id !== id);
-    this.setState({
-      masterMerchList: newMasterMerchList,
-      selectedMerch: null
-    });
+    const { dispatch } = this.props;
+    const action = {
+      type: 'DELETE_MERCH',
+      id: id
+    }
+    dispatch(action);
+    this.setState({ selectedMerch: null })
   }
 
   handleEditingMerchInList = (merchToEdit) => {
-    const editedMasterMerchList = this.state.masterMerchList
-      .filter(merch => merch.id !== this.state.selectedMerch.id)
-      .concat(merchToEdit);
+    const { dispatch } = this.props
+    const { id, name, quantity, description } = merchToEdit;
+    const action = {
+      type: 'ADD_MERCH',
+      id: id,
+      name: name,
+      quantity: quantity,
+      description: description,
+    }
+    dispatch(action);
     this.setState({
-        masterMerchList: editedMasterMerchList,
-        editing: false,
-        selectedMerch: null
-      });
-      console.log('cart', this.state.cart)
+      editing: false,
+      selectedMerch: null,
+    });
   }
   
   handleRestockingMerch = (merchToEdit) => {
-    const editedMasterMerchList = this.state.masterMerchList
-    .filter(merch => merch.id !== this.state.selectedMerch.id)
-    .concat(merchToEdit);
-  this.setState({
-      masterMerchList: editedMasterMerchList,
+    const { dispatch } = this.props;
+    const action = {
+      ...merchToEdit,
+      type: 'ADD_MERCH'
+    }
+    dispatch(action)
+    this.setState({
       editing: false,
       selectedMerch: merchToEdit
     });
@@ -111,7 +131,7 @@ class MerchControl extends React.Component {
 
   render(){
     let empty = null;
-    if (this.state.masterMerchList.length === 0) {
+    if (this.props.masterMerchList.length === 0) {
       empty = <h1>NO MERCH YET</h1>
     }
       
@@ -136,7 +156,7 @@ class MerchControl extends React.Component {
       currentlyVisibleState = <NewMerchForm onNewMerchCreation={this.handleAddingNewMerch} />
       buttonText = "Return to Merch List"
     } else {
-      currentlyVisibleState = <MerchList MerchList={this.state.masterMerchList} onMerchSelection={this.handleChangingSelectedMerch} />;
+      currentlyVisibleState = <MerchList merchList={this.props.masterMerchList} onMerchSelection={this.handleChangingSelectedMerch} />;
       buttonText = "Add Merch"
     }
     return (
@@ -160,5 +180,17 @@ class MerchControl extends React.Component {
     );
   }
 }
+
+MerchControl.propTypes = {
+  masterMerchList: PropTypes.object
+};
+
+const MapStateToProps = state => {
+  return {
+    masterMerchList: state
+  }
+}
+
+MerchControl = connect(MapStateToProps)(MerchControl);
 
 export default MerchControl;
